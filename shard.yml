@@ -1,0 +1,13 @@
+name: cr-helper
+description: A simple Crystal learning project with Discord
+version: 0.0.1
+crystal: 1.2.2
+
+authors:
+  - Devonte <https://github.com/devnote-dev>
+
+dependencies:
+  discordcr:
+    github: shardlab/discordcr
+
+license: GNU AGPL v3
