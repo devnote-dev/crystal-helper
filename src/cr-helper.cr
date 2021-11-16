@@ -4,7 +4,7 @@ require "./config"
 bot = Discord::Client.new TOKEN
 
 bot.on_message_create do |message|
-  return if message.content.starts_with? "$"
+  return if !message.content.starts_with? "$"
 
   case message.content.byte_slice 1
   when "ping"
