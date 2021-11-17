@@ -3,7 +3,7 @@ require "./config"
 require "./handler"
 
 bot = Discord::Client.new TOKEN
-handler = Handler.new
+handler = CmdHandler.new
 
 bot.on_message_create { |msg| handler.handle msg }
 
