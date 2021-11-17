@@ -1,5 +1,9 @@
 require "./command"
 
+macro import(file)
+  require {{file}}
+end
+
 class CmdHandler
   commands : Hash(String, Command)
 
@@ -8,10 +12,8 @@ class CmdHandler
 
   def load
     Dir.children("./commands").each do |file|
-      next if !file.ends_with? ".cr"
       begin
-        require "./commands/#{file}"
-        next if command.is_a?(Command)
+        import "./commands/#{file}"
         cmd = command.as(Command)
         @commands[cmd.name] = cmd
         puts "Loaded file #{file}"
