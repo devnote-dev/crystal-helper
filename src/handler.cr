@@ -1,8 +1,9 @@
 require "discordcr"
 require "./command"
 
-macro import(file)
-  require {{file}}
+# use 'path' over 'file' to prevent variable conflict
+macro import(path)
+  require {{path}}
 end
 
 class CmdHandler
