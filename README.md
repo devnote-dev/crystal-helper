@@ -3,4 +3,4 @@ This is a mini project bot I'm working on as part of me learning more about [Cry
 
 I would recommend not using the bot right now as it's in really early stages and is a learning project more than a production project. The code is open-source for people that also want to learn Crystal this way or want to correct my (currently) bad Crystal code.
 
-© 2021 devnote-dev
+© 2021-2022 devnote-dev
