@@ -11,11 +11,13 @@ bot = Discord::Client.new(config["token"].as_s)
 
 bot.on_message_create do |message|
 	next if !message.content.starts_with? "$"
-	case message.content.byte_slice(1)
+
+	cmd = message.content.byte_slice(1).split(separator: " ", remove_empty: true)[0]
+	case cmd
 	when "ping"
-		cmdPing bot, message
+		cmd_ping bot, message
 	else
-		bot.create_message(message.channel_id, "command not found!")
+		bot.create_message(message.channel_id, "command '#{cmd}' not found!")
 	end
 end
 
