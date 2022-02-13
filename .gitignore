@@ -1,9 +1,10 @@
 /bin/
 /docs/
 /lib/
+/temp/
 /.shards/
-/shard.lock
 /.vscode/
+shard.lock
 
 *.dwarf
 *.test.*
