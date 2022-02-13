@@ -3,6 +3,7 @@
 /lib/
 /.shards/
 /shard.lock
+/.vscode/
 
 *.dwarf
 *.test.*
