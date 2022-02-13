@@ -4,4 +4,4 @@
 /.shards/
 /shard.lock
 *.dwarf
-config.cr
+config.yml
