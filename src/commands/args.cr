@@ -14,21 +14,24 @@ def cmd_args(client, message)
     **Parsed Arguments**
     total args: #{args.raw.size} • code args: #{args.code.size}
     args: `#{args.raw}`
-    
     FMT
 
-    string << "user mentions: "
-    if args.user_mentions.size
+    string << "\nuser mentions: "
+    if args.user_mentions.size != 0
       string << "\n" + args.user_mentions.map { |m| "<@#{m}>" }.join ", "
     else
-      string << "no mentions"
+      string << "none"
     end
 
     string << "\nchannel mentions: "
-    if args.channel_mentions.size
+    if args.channel_mentions.size != 0
       string << "\n" + args.channel_mentions.map { |m| "<##{m}>" }.join ", "
     else
-      string << "no mentions"
+      string << "none"
+    end
+
+    if args.code.size != 0
+      string << "\n```\n" + args.code.join(" ") + "\n```"
     end
   end
 
