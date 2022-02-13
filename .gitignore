@@ -3,5 +3,8 @@
 /lib/
 /.shards/
 /shard.lock
+
 *.dwarf
+*.test.*
+test.*
 config.yml
