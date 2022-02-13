@@ -10,14 +10,14 @@ struct ParsedArgs
 
   def initialize(msg : String)
     @content = msg
-    @raw = parse_standard_args(msg).as(Array(String))
-    @cmd = @raw[0].as(String)
-    @raw.shift
+    @raw = parse_standard_args msg
+    @cmd = @raw[0]
+    @raw = @raw[1..]
 
     users, chans = parse_mentions msg
     @user_mentions = users
     @channel_mentions = chans
-    @code = parse_codeblock(msg).as(Array(String))
+    @code = parse_codeblock @raw
   end
 
   def [](index)
@@ -41,27 +41,29 @@ def parse_standard_args(msg : String) : Array(String)
   parsed
 end
 
-def parse_codeblock(msg : String) : Array(String)
+def parse_codeblock(args : Array(String)) : Array(String)
   parsed = [] of String
   start = false
 
-  msg.split(" ").each do |arg|
-    if arg.starts_with? "```"
+  return parsed if args.size == 0
+
+  args.each do |arg|
+    if arg.starts_with?("```") || arg.ends_with?("```")
+      parsed << arg
       break if start
       start = true
-      if arg != "```"
-        parsed << arg.byte_slice(3)
-      end
       next
-    elsif arg.ends_with? "```"
-      break
     end
 
-    next unless start
-    parsed << arg
+    parsed << arg if start
   end
 
-  parsed
+  fmt = parsed.join " "
+  fmt = fmt.byte_slice 3
+  fmt = fmt.byte_slice(1) if fmt.starts_with? '\n'
+  fmt = fmt.chomp("```").chomp('\n')
+
+  fmt.split " "
 end
 
 def parse_mentions(msg : String) : Array(Array(UInt64))
