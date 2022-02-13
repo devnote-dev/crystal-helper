@@ -9,11 +9,15 @@ config = File.open("./config.yml") { |f| YAML.parse f }
 
 bot = Discord::Client.new(config["token"].as_s)
 
+bot.on_ready do |_|
+	bot.status_update status: "with Crystal docs"
+end
+
 bot.on_message_create do |message|
 	next unless message.content.starts_with? "$"
 
 	cmd = message.content.byte_slice(1).split(separator: " ", remove_empty: true)[0]
-	next unless cmd.size
+	next if cmd.size == 0
 
 	case cmd
 	when "ping"
@@ -23,7 +27,7 @@ bot.on_message_create do |message|
 	when "run"
 		cmd_run bot, message
 	else
-		bot.create_message(message.channel_id, "command '#{cmd}' not found!")
+		next
 	end
 end
 

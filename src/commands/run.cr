@@ -12,7 +12,6 @@ def cmd_run(client, message)
   end
 
   code = args.code.join " "
-  puts code
   msg = client.create_message(message.channel_id, "Running...")
 
   ts = Time.utc.millisecond

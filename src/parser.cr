@@ -31,7 +31,7 @@ def parse_standard_args(msg : String) : Array(String)
 
   msg.split(separator: " ", remove_empty: true).each do |arg|
     if arg == "```"
-      is_block = !!is_block
+      is_block = !is_block
     end
 
     next if is_block
