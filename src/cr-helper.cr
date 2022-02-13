@@ -2,6 +2,7 @@ require "discordcr"
 require "yaml"
 
 require "./commands/ping.cr"
+require "./commands/args.cr"
 
 config = File.open("./config.yml") { |f| YAML.parse f }
 
@@ -16,6 +17,8 @@ bot.on_message_create do |message|
 	case cmd
 	when "ping"
 		cmd_ping bot, message
+	when "args"
+		cmd_args bot, message
 	else
 		bot.create_message(message.channel_id, "command '#{cmd}' not found!")
 	end
